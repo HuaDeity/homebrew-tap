@@ -18,3 +18,4 @@ HuaDeity's [Homebrew tap](https://docs.brew.sh/Taps) listing the products that c
 | [Readwise_iBooks](https://readwise.io/ibooks) | Import highlights from Apple Books to Readwise | `brew install --cask readwise-ibooks` |
 | [RunCat Plugins Manager](https://kyome.io/runcat/index.html?lang=en#plugins) | Enable RunCat to show the CPU temperature | `brew install --cask runcat-plugins-manager` |
 | [全球学术快报](https://cajviewer.cnki.net/index.html)(Apple Silicon Version) | Academic application | `brew install --cask cnkiexpress` |
+| [Doppler](https://brushedtype.co/doppler/) | Music player for people who buy music| `brew install --cask doppler` |
