@@ -1,21 +1,28 @@
 # homebrew-tap
 
-HuaDeity's [Homebrew tap](https://docs.brew.sh/Taps) listing the products that can be installed using Homebrew.
+A Homebrew tap that contains a list of available Formula/Casks for installation. This tap can be used in conjunction with the official Homebrew tap. Additionally, I have maintained some products in the official Homebrew tap.
 
-## Available products
+## Available Formula/Casks
+
+### In this tap
+
+| Name | Description | Installation command | Why not in official tap | 
+|-|-|-|-|
+| [EasyConnect](https://www.sangfor.com.cn/product-and-solution/sangfor-security/ssl-vpn) | Secure remote access solution for enterprises | `brew install --cask HuaDeity/tap/easyconnect` | [ #141884](https://github.com/Homebrew/homebrew-cask/pull/141884#issuecomment-1445022301) The package file contains an untrusted certificate that is not accepted in the official repository. |
+
+
+### In Official tap
 
 | Name | Description | Installation command |
-|------|-------------|----------------------|
-| [EasyConnect](https://www.sangfor.com.cn/product-and-solution/sangfor-security/ssl-vpn) | Secure remote access solution for enterprises | `brew install --cask HuaDeity/tap/easyconnect` |
-
-## Other Cask maintained by HuaDeity in Official Homebrew Cask taps
-
-| Name | Description | Installation command |
-|------|-------------|----------------------|
+|-|-|-|
 | [MenubarX](https://menubarx.app/) | Menu bar browser | `brew install --cask menubarx` |
 | [Mail Assistant](https://docs.getdrafts.com/misc/mail-assistant) | Companion tool for Drafts to allow sending HTML formatted email | `brew install --cask mail-assistant` |
 | [Interact Scratchpad](https://docs.getdrafts.com/docs/misc/interact-scratchpad) | Menu bar utility to create contacts from snippets of text | `brew install --cask interact-scratchpad` |
 | [Readwise_iBooks](https://readwise.io/ibooks) | Import highlights from Apple Books to Readwise | `brew install --cask readwise-ibooks` |
-| [RunCat Plugins Manager](https://kyome.io/runcat/index.html?lang=en#plugins) | Enable RunCat to show the CPU temperature | `brew install --cask runcat-plugins-manager` |
-| [全球学术快报](https://cajviewer.cnki.net/index.html)(Apple Silicon Version) | Academic application | `brew install --cask cnkiexpress` |
 | [Doppler](https://brushedtype.co/doppler/) | Music player for people who buy music| `brew install --cask doppler` |
+
+## Deprecated Formula/Casks 
+| Name | Description | Why is deprecated |
+|-|-|-|
+| [RunCat Plugins Manager](https://kyome.io/runcat/index.html?lang=en#plugins) | Enable RunCat to show the CPU temperature | [ #159901](https://github.com/Homebrew/homebrew-cask/pull/159901#issuecomment-1806714343) The plugin function has been removed due to a significant update of Runcat. |
+| [全球学术快报](https://cajviewer.cnki.net/index.html)(Apple Silicon Version) | Academic application | I have no idea why it had been removed from official tap, and I don't use it any more.|
