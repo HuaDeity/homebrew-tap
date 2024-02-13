@@ -6,23 +6,28 @@ A Homebrew tap that contains a list of available Formula/Casks for installation.
 
 ### In this tap
 
-| Name | Description | Installation command | Why not in official tap | 
-|-|-|-|-|
+| Name                                                                                    | Description                                   | Installation command                           | Why not in official tap                                                                                                                                                                       |
+| --------------------------------------------------------------------------------------- | --------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [EasyConnect](https://www.sangfor.com.cn/product-and-solution/sangfor-security/ssl-vpn) | Secure remote access solution for enterprises | `brew install --cask HuaDeity/tap/easyconnect` | [ #141884](https://github.com/Homebrew/homebrew-cask/pull/141884#issuecomment-1445022301) The package file contains an untrusted certificate that is not accepted in the official repository. |
-
 
 ### In Official tap
 
-| Name | Description | Installation command |
-|-|-|-|
-| [MenubarX](https://menubarx.app/) | Menu bar browser | `brew install --cask menubarx` |
-| [Mail Assistant](https://docs.getdrafts.com/misc/mail-assistant) | Companion tool for Drafts to allow sending HTML formatted email | `brew install --cask mail-assistant` |
-| [Interact Scratchpad](https://docs.getdrafts.com/docs/misc/interact-scratchpad) | Menu bar utility to create contacts from snippets of text | `brew install --cask interact-scratchpad` |
-| [Readwise_iBooks](https://readwise.io/ibooks) | Import highlights from Apple Books to Readwise | `brew install --cask readwise-ibooks` |
-| [Doppler](https://brushedtype.co/doppler/) | Music player for people who buy music| `brew install --cask doppler` |
+| Name                                                                            | Description                                                     | Installation command                      |
+| ------------------------------------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------- |
+| [MenubarX](https://menubarx.app/)                                               | Menu bar browser                                                | `brew install --cask menubarx`            |
+| [Mail Assistant](https://docs.getdrafts.com/misc/mail-assistant)                | Companion tool for Drafts to allow sending HTML formatted email | `brew install --cask mail-assistant`      |
+| [Interact Scratchpad](https://docs.getdrafts.com/docs/misc/interact-scratchpad) | Menu bar utility to create contacts from snippets of text       | `brew install --cask interact-scratchpad` |
+| [Readwise_iBooks](https://readwise.io/ibooks)                                   | Import highlights from Apple Books to Readwise                  | `brew install --cask readwise-ibooks`     |
+| [Doppler](https://brushedtype.co/doppler/)                                      | Music player for people who buy music                           | `brew install --cask doppler`             |
+| [Mumu Player Pro](https://mumu.163.com/mac/)                                    | Android emulator                                                | `brew install --cask mumuplayer`          |
+| [Douyin Chat](https://www.douyin.com/downloadpage/chat)                         | Chat client for Douyin                                          | `brew install --cask douyin-chat`         |
+| [Screens Assist](https://edovia.com/en/screens-assist/)                         | Share screens link                                              | `brew install --cask screens-assist`      |
+| [CleanupBuddy](https://cleanupbuddy.app/)                                       | Clean keyboard and trackpad                                     | `brew install --cask cleanupbuddy`        |
+| [OP.GG Desktop](https://op.gg/desktop/)                                         | Game records and champion analysis                              | `brew install --cask opgg`                |
 
-## Deprecated Formula/Casks 
-| Name | Description | Why is deprecated |
-|-|-|-|
+## Deprecated Formula/Casks
+
+| Name                                                                         | Description                               | Why is deprecated                                                                                                                                                     |
+| ---------------------------------------------------------------------------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [RunCat Plugins Manager](https://kyome.io/runcat/index.html?lang=en#plugins) | Enable RunCat to show the CPU temperature | [ #159901](https://github.com/Homebrew/homebrew-cask/pull/159901#issuecomment-1806714343) The plugin function has been removed due to a significant update of Runcat. |
-| [全球学术快报](https://cajviewer.cnki.net/index.html)(Apple Silicon Version) | Academic application | I have no idea why it had been removed from official tap, and I don't use it any more.|
+| [全球学术快报](https://cajviewer.cnki.net/index.html)(Apple Silicon Version) | Academic application                      | I have no idea why it had been removed from official tap, and I don't use it any more.                                                                                |
