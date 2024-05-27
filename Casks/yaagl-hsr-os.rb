@@ -17,9 +17,10 @@ cask "yaagl-hsr-os" do
   app "Yaagl HSR OS.app"
 
   zap trash: [
-    "~/Library/Application Support/Yaagl OS",
-    "~/Library/Caches/com.3shain.yaagl.os",
-    "~/Library/Saved Application State/com.3shain.yaagl.os.savedState",
-    "~/Library/WebKit/com.3shain.yaagl.os",
+    "~/Library/Application Support/Yaagl HSR OS",
+    "~/Library/Caches/com.3shain.yaagl.hkrpg.os",
+    "~/Library/Saved Application State/com.3shain.yaagl.hkrpg.os.savedState",
+    "~/Library/WebKit/com.3shain.yaagl.hkrpg.os",
+    "~/Library/WebKit/com.3shain.yaagl.hkrpg.os.test",
   ]
 end
