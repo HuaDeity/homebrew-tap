@@ -1,6 +1,6 @@
 cask "yaagl-hsr-os" do
-  version "0.1.12"
-  sha256 "c9014a14c3554d1e68e124f190e4df6a7d880ee833d2c77497fab1e7aeac3199"
+  version "0.1.15"
+  sha256 "b92ca41a014f1895eda7c957213bb54abc76c0bc9e1cd4933e49f35ed1204432"
 
   url "https://github.com/yaagl/yet-another-anime-game-launcher/releases/download/#{version}/Yaagl.HSR.OS.app.tar.gz"
   name "Yaagl HSR OS"
@@ -21,6 +21,9 @@ cask "yaagl-hsr-os" do
     "~/Library/Caches/com.3shain.yaagl.hkrpg.os",
     "~/Library/Saved Application State/com.3shain.yaagl.hkrpg.os.savedState",
     "~/Library/WebKit/com.3shain.yaagl.hkrpg.os",
-    "~/Library/WebKit/com.3shain.yaagl.hkrpg.os.test",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end
