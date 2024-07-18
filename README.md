@@ -6,10 +6,10 @@ A Homebrew tap that contains a list of available Formula/Casks for installation.
 
 ### In this tap
 
-| Name                                                                                    | Description                                   | Installation command                           | Why not in official tap                                                                                                                                                                       |
-| --------------------------------------------------------------------------------------- | --------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [EasyConnect](https://www.sangfor.com.cn/product-and-solution/sangfor-security/ssl-vpn) | Secure remote access solution for enterprises | `brew install --cask HuaDeity/tap/easyconnect` | [ #141884](https://github.com/Homebrew/homebrew-cask/pull/141884#issuecomment-1445022301) The package file contains an untrusted certificate that is not accepted in the official repository. |
-| [Prompt Local Terminal](https://help.panic.com/prompt/prompt-local-terminal/) | Helper to enable local terminal access in Prompt | `brew install --cask HuaDeity/tap/prompt-local-terminal` | [#169495](https://github.com/Homebrew/homebrew-cask/pull/169495) They refused to accept a cask that is not an application but merely a helper program. |
+| Name                                                                                    | Description                                      | Installation command                                     | Why not in official tap                                                                                                                                                                       |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [EasyConnect](https://www.sangfor.com.cn/product-and-solution/sangfor-security/ssl-vpn) | Secure remote access solution for enterprises    | `brew install --cask HuaDeity/tap/easyconnect`           | [ #141884](https://github.com/Homebrew/homebrew-cask/pull/141884#issuecomment-1445022301) The package file contains an untrusted certificate that is not accepted in the official repository. |
+| [Prompt Local Terminal](https://help.panic.com/prompt/prompt-local-terminal/)           | Helper to enable local terminal access in Prompt | `brew install --cask HuaDeity/tap/prompt-local-terminal` | [#169495](https://github.com/Homebrew/homebrew-cask/pull/169495) They refused to accept a cask that is not an application but merely a helper program.                                        |
 
 ### In Official tap
 
@@ -25,6 +25,8 @@ A Homebrew tap that contains a list of available Formula/Casks for installation.
 | [Screens Assist](https://edovia.com/en/screens-assist/)                         | Share screens link                                              | `brew install --cask screens-assist`      |
 | [CleanupBuddy](https://cleanupbuddy.app/)                                       | Clean keyboard and trackpad                                     | `brew install --cask cleanupbuddy`        |
 | [OP.GG Desktop](https://op.gg/desktop/)                                         | Game records and champion analysis                              | `brew install --cask opgg`                |
+| [iTerm2 AI Plugin](https://iterm2.com/ai-plugin.html)                           | Enable generative AI features in iTerm2                         | `brew install --cask itermai`             |
+| [notchnook](https://lo.cafe/notchnook)                                          | Handy utility to manage and customize the notch area            | `brew install --cask notchnook`           |
 
 ## Deprecated Formula/Casks
 
