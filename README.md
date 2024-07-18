@@ -26,7 +26,8 @@ A Homebrew tap that contains a list of available Formula/Casks for installation.
 | [CleanupBuddy](https://cleanupbuddy.app/)                                       | Clean keyboard and trackpad                                     | `brew install --cask cleanupbuddy`        |
 | [OP.GG Desktop](https://op.gg/desktop/)                                         | Game records and champion analysis                              | `brew install --cask opgg`                |
 | [iTerm2 AI Plugin](https://iterm2.com/ai-plugin.html)                           | Enable generative AI features in iTerm2                         | `brew install --cask itermai`             |
-| [notchnook](https://lo.cafe/notchnook)                                          | Handy utility to manage and customize the notch area            | `brew install --cask notchnook`           |
+| [NotchNook](https://lo.cafe/notchnook/)                                         | Handy utility to manage and customize the notch area            | `brew install --cask notchnook`           |
+| [Longplay](https://longplay.rocks/)                                             | Rediscover, enjoy and organise your album collection            | `brew install --cask longplay`            |
 
 ## Deprecated Formula/Casks
 
