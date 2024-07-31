@@ -1,6 +1,6 @@
 cask "sleeve" do
-  version "2.3.2,84"
-  sha256 "71161922a4cdbae8af306ca63e34342649c2adcb48620983a0eb2f56ac651b4f"
+  version "2.3.3,88"
+  sha256 "077eff2942cfc45c175759592f81cffc1db00d66d5b53bc0600638f6f90f314e"
 
   url "https://replay-sleeve-distribution.s3.amazonaws.com/#{version.csv.second}/Sleeve.dmg",
       verified: "replay-sleeve-distribution.s3.amazonaws.com"
