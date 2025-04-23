@@ -1,5 +1,5 @@
 cask "sideloadly" do
-  version "0.50.1"
+  version "0.55.5"
   sha256 :no_check
 
   url "https://sideloadly.io/SideloadlySetup.dmg"
