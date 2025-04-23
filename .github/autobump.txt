@@ -1,0 +1,9 @@
+easyconnect
+prompt-local-terminal
+sideloadly
+yaagl
+yaagl-hsr
+yaagl-hsr-os
+yaagl-os
+yaagl-zzz
+yaagl-zzz-os
