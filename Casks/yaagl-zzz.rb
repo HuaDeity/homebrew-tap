@@ -1,6 +1,6 @@
 cask "yaagl-zzz" do
-  version "0.2.26"
-  sha256 "92cdf3a1ad0a3f7ee7144dc868bcc3b42c90e1ea7469dde17c8816e72cb72c6c"
+  version "0.2.28"
+  sha256 "5e24f0827dbfa20fa118925a44b2a156c9d85e6e89f083c73154b69b04a448ad"
 
   url "https://github.com/yaagl/yet-another-anime-game-launcher/releases/download/#{version}/Yaagl.ZZZ.app.tar.gz"
   name "Yaagl ZZZ"
@@ -22,8 +22,4 @@ cask "yaagl-zzz" do
     "~/Library/Saved Application State/com.3shain.yaagl.nap.cn.savedState",
     "~/Library/WebKit/com.3shain.yaagl.nap.cn",
   ]
-
-  caveats do
-    requires_rosetta
-  end
 end
