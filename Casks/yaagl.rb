@@ -1,6 +1,6 @@
 cask "yaagl" do
-  version "0.2.28"
-  sha256 "2144077c5d2689c6fa4af488dcf3243f8fd27ea7f90bb36d62a6900b5706bb72"
+  version "0.2.29"
+  sha256 "d08b1a0a0ca19b03af6605e0ac8304e4cdd04d0047e8aa57b3d5857ca0d3e1d3"
 
   url "https://github.com/yaagl/yet-another-anime-game-launcher/releases/download/#{version}/Yaagl.app.tar.gz"
   name "Yaagl"
