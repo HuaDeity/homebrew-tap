@@ -1,6 +1,6 @@
 cask "yaagl-zzz-os" do
-  version "0.3.0"
-  sha256 "71938043c2e549f495425cd3413c1ccc9e0e1a92108c47d386a54e544aabe3ff"
+  version "0.3.8"
+  sha256 "6a264df875d70257403bd4b2ae60869c26e033b83970f3b7121e4b203ecc8122"
 
   url "https://github.com/yaagl/yet-another-anime-game-launcher/releases/download/#{version}/Yaagl.ZZZ.OS.app.tar.gz"
   name "Yaagl ZZZ OS"
@@ -12,7 +12,7 @@ cask "yaagl-zzz-os" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "Yaagl ZZZ OS.app"
 
