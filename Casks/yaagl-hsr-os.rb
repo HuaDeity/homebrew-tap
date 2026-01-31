@@ -1,6 +1,6 @@
 cask "yaagl-hsr-os" do
-  version "0.3.0"
-  sha256 "b4d68e9724ec1cb3447b769249339e0154bfb1442578b0f98c14e6d79d818878"
+  version "0.3.8"
+  sha256 "2416aba2841e9ddbb8a04bcf424877cbf12b9720a928dc3d3e93ec16e777073d"
 
   url "https://github.com/yaagl/yet-another-anime-game-launcher/releases/download/#{version}/Yaagl.HSR.OS.app.tar.gz"
   name "Yaagl HSR OS"
@@ -12,7 +12,7 @@ cask "yaagl-hsr-os" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "Yaagl HSR OS.app"
 
