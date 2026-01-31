@@ -1,6 +1,5 @@
 easyconnect
 prompt-local-terminal
-sideloadly
 yaagl
 yaagl-hsr
 yaagl-hsr-os
