@@ -1,6 +1,6 @@
 cask "yaagl" do
-  version "0.3.0"
-  sha256 "8cb616f978b750483ce7d8b69897e7cc5f31b4fde0762a3bf87529d07021f5c0"
+  version "0.3.8"
+  sha256 "a2dcab5d67c1afc380edc9c056b233b2a2cf6738b37e40a2e4e3ef235b99cfd3"
 
   url "https://github.com/yaagl/yet-another-anime-game-launcher/releases/download/#{version}/Yaagl.app.tar.gz"
   name "Yaagl"
@@ -12,7 +12,7 @@ cask "yaagl" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "Yaagl.app"
 
