@@ -1,8 +1,0 @@
-easyconnect
-prompt-local-terminal
-yaagl
-yaagl-hsr
-yaagl-hsr-os
-yaagl-os
-yaagl-zzz
-yaagl-zzz-os
