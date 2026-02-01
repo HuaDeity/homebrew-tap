@@ -38,5 +38,5 @@ jobs:
           if [[ -n "${CASKS-}" ]]; then
             xargs "${BREW_BUMP[@]}" <<<"${CASKS}"
           else
-            "${BREW_BUMP[@]}" --auto --tap=huadeity/tap
+            "${BREW_BUMP[@]}" --tap=huadeity/tap
           fi
