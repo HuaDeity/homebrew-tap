@@ -1,6 +1,6 @@
 cask "prompt-local-terminal" do
   version "3.0.4"
-  sha256 "413ddde254ebeadc0769b0e5bd9bc96a4595206c3f57e1a0f53af06f8e7c0702"
+  sha256 "6b8dde59e01572b5fcfc40d6619870d80451b16134b58aee1c2ab5ed45a4702e"
 
   url "https://download-cdn.panic.com/prompt/Install%20Prompt%20Local%20Terminal%20#{version}.zip"
   name "Prompt Local Terminal"
