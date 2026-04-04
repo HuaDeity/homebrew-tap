@@ -5,10 +5,6 @@ class VscodeHtmlLanguageservice < Formula
   sha256 "93e4e3b97c0af720ff5068187b7058ed9843c155cd47859db05ba53c12b38d78"
   license "MIT"
 
-  bottle do
-    sha256 cellar: :any_skip_relocation, all: "59cb4fd7006fbecfba8e923a6b88f993b7bd154135edf2142f101152fcbd2c2d"
-  end
-
   depends_on "node"
   conflicts_with "vscode-langservers-extracted", because: "both provide vscode-html-language-server"
 
