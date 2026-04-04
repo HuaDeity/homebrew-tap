@@ -10,7 +10,6 @@ class VscodeLangserversExtracted < Formula
     formula "vscode-html-languageservice"
   end
 
-
   depends_on "huadeity/tap/vscode-html-languageservice"
   depends_on "node"
 
