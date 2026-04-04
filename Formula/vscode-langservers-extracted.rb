@@ -10,6 +10,13 @@ class VscodeLangserversExtracted < Formula
     formula "vscode-html-languageservice"
   end
 
+  bottle do
+    root_url "https://github.com/HuaDeity/homebrew-tap/releases/download/vscode-langservers-extracted-4.10.7"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "308dc1c13e84417aeca55593c8cfe12c6511c37df5f7ccd670de40a50fbb1b99"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "394988e827739f5b578745f404675b17ac7b3dda9f6b199f5924756510fe2150"
+  end
+
   depends_on "huadeity/tap/vscode-html-languageservice"
   depends_on "node"
 
