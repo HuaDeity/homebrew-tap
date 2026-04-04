@@ -13,11 +13,11 @@ cask "easyconnect" do
 
   pkg "Install EasyConnect.pkg", allow_untrusted: true
 
-  uninstall pkgutil: "com.sangfor.EasyConnect",
-            script:  {
+  uninstall script:  {
               executable: "/Applications/EasyConnect.app/Contents/Resources/shell/uninstall_easyconnect.sh",
               sudo:       true,
-            }
+            },
+            pkgutil: "com.sangfor.EasyConnect"
 
   zap trash: [
     "/Library/LaunchDaemons/com.sangfor.EasyMonitor.plist",
