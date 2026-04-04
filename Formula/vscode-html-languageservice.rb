@@ -5,6 +5,13 @@ class VscodeHtmlLanguageservice < Formula
   sha256 "93e4e3b97c0af720ff5068187b7058ed9843c155cd47859db05ba53c12b38d78"
   license "MIT"
 
+  bottle do
+    root_url "https://github.com/HuaDeity/homebrew-tap/releases/download/vscode-html-languageservice-4.10.7"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "a83867dac100395e0f6c4891108f10e5c4760bcb3c28bb1d48d1fb7bd673c197"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "d25afb88891ac8c560e58cb369f8bd0150de3bc28d4faa841e191727f6aac786"
+  end
+
   depends_on "node"
   conflicts_with "vscode-langservers-extracted", because: "both provide vscode-html-language-server"
 
