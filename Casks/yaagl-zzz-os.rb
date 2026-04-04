@@ -1,6 +1,6 @@
 cask "yaagl-zzz-os" do
-  version "0.3.8"
-  sha256 "6a264df875d70257403bd4b2ae60869c26e033b83970f3b7121e4b203ecc8122"
+  version "0.3.12"
+  sha256 "583e9f4d6a4ecb0ed60a120c4ae3d9b7b542e63f75f28bc21ce4cd1b6204dc99"
 
   url "https://github.com/yaagl/yet-another-anime-game-launcher/releases/download/#{version}/Yaagl.ZZZ.OS.app.tar.gz"
   name "Yaagl ZZZ OS"
