@@ -33,6 +33,7 @@ jobs:
       image: ghcr.io/homebrew/brew:main
     env:
       GNUPGHOME: /tmp/gnupghome
+      HOMEBREW_DEVELOPER: 1
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -44,15 +45,17 @@ jobs:
         uses: Homebrew/actions/git-user-config@main
 
       - name: Bump formulae
+        id: autobump
         env:
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.HOMEBREW_TAP_REPO_WORKFLOW_TOKEN }}
           FORMULAE: ${{ inputs.formulae }}
+        continue-on-error: true
         run: |
           BREW_BUMP=(brew bump --no-fork --open-pr --formulae --bump-synced)
           if [[ -n "${FORMULAE-}" ]]; then
             xargs -t "${BREW_BUMP[@]}" <<<"${FORMULAE}"
           else
-            "${BREW_BUMP[@]}" --auto --tap=HuaDeity/tap
+            "${BREW_BUMP[@]}" --tap=HuaDeity/tap
           fi
 
   autobump-casks:
@@ -79,5 +82,5 @@ jobs:
           if [[ -n "${CASKS-}" ]]; then
             xargs "${BREW_BUMP[@]}" <<<"${CASKS}"
           else
-            "${BREW_BUMP[@]}" --auto --tap=huadeity/tap
+            "${BREW_BUMP[@]}" --tap=huadeity/tap
           fi
