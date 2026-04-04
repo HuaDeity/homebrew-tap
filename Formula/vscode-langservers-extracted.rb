@@ -10,6 +10,10 @@ class VscodeLangserversExtracted < Formula
     sha256 cellar: :any_skip_relocation, all: "15af5b99737600753a84dbfe8dcb22799af0d40959d6f79449811c2f543823d7"
   end
 
+  livecheck do
+    formula "vscode-html-languageservice"
+  end
+
   depends_on "huadeity/tap/vscode-html-languageservice"
   depends_on "node"
 
