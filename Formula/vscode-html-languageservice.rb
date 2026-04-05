@@ -7,6 +7,7 @@ class VscodeHtmlLanguageservice < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/huadeity/homebrew-tap"
+    rebuild 1
   end
 
   depends_on "node"
