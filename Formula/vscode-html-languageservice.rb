@@ -6,8 +6,10 @@ class VscodeHtmlLanguageservice < Formula
   license "MIT"
 
   bottle do
-    root_url "https://ghcr.io/v2/huadeity/homebrew-tap"
-    rebuild 1
+    root_url "https://github.com/HuaDeity/homebrew-tap/releases/download/vscode-html-languageservice-4.10.7"
+    rebuild 2
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "98d681e82bab27fa142ad9c909f438b7de5eeee684dce30e4609fe3fc7d2a7c9"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "32c05879659299b704fda9672a16801163325f0fd9851f42a2324e9832432c3b"
   end
 
   depends_on "node"

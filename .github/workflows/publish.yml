@@ -45,7 +45,6 @@ jobs:
         run: |
           brew pr-pull \
             --debug \
-            --no-cherry-pick \
             --workflows=tests.yml \
             --root-url="https://ghcr.io/v2/huadeity/homebrew-tap" \
             --tap="$GITHUB_REPOSITORY" \
