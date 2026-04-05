@@ -49,7 +49,18 @@ jobs:
           bottles-directory: ${{ env.BOTTLES_DIR }}
 
       - name: Test formulae
-        run: brew test-bot --only-formulae --only-json-tab
+        # --only-json-tab: removes INSTALL_RECEIPT.json before tarring and uses GNU tar for
+        # reproducibility. Without it, INSTALL_RECEIPT.json differs per platform (OS, arch,
+        # compiler, dependency versions), making each platform's bottle SHA unique and
+        # preventing brew bottle --merge from consolidating them into a single `all:` bottle.
+        # With it, all platforms produce identical tarballs → identical SHAs → `all:` bottle.
+        #
+        # --root-url: brew test-bot defaults to GitHub Releases URL for non-core taps
+        # (see test_bot/formulae.rb). This URL ends up in the bottle JSON, and brew bottle
+        # --merge reads root_url directly from the JSON (ignoring brew pr-pull's --root-url).
+        # Passing it here ensures the JSON — and therefore the formula — gets the correct
+        # GHCR root_url.
+        run: brew test-bot --only-formulae --only-json-tab --root-url="https://ghcr.io/v2/huadeity/homebrew-tap"
         working-directory: ${{ env.BOTTLES_DIR }}
         env:
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
