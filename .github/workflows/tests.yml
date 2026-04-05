@@ -6,47 +6,58 @@ on:
       - main
   pull_request:
 
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash -xeuo pipefail {0}
+
 jobs:
-  test-bot:
-    strategy:
-      matrix:
-        os: [ macos-26 ]
-        include:
-          - os: ubuntu-latest
-            container: ghcr.io/homebrew/brew:main
-    runs-on: ${{ matrix.os }}
-    container: ${{ matrix.container }}
-    permissions:
-      actions: read
-      checks: read
-      contents: read
-      pull-requests: read
+  tap_syntax:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/homebrew/brew:main
     steps:
       - name: Set up Homebrew
-        id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Cache Homebrew Bundler RubyGems
-        uses: actions/cache@v5
-        with:
-          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
-          key: ${{ matrix.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
-          restore-keys: ${{ matrix.os }}-rubygems-
-
-      - run: brew test-bot --only-cleanup-before
-
-      - run: brew test-bot --only-setup
+          core: true
 
       - run: brew test-bot --only-tap-syntax
 
-      - run: brew test-bot --only-formulae
-        if: github.event_name == 'pull_request'
-
-      - name: Upload bottles as artifact
-        if: always() && github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v5
+  test-bot:
+    if: github.event_name == 'pull_request'
+    needs: tap_syntax
+    strategy:
+      matrix:
+        include:
+          - runner: macos-latest
+          - runner: ubuntu-latest
+            container: ghcr.io/homebrew/brew:main
+    runs-on: ${{ matrix.runner }}
+    container: ${{ matrix.container || '' }}
+    timeout-minutes: 60
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      BOTTLES_DIR: ${{ github.workspace }}/bottles
+    steps:
+      - name: Pre-test steps
+        uses: Homebrew/actions/pre-build@main
         with:
-          name: bottles_${{ matrix.os }}
-          path: '*.bottle.*'
+          bottles-directory: ${{ env.BOTTLES_DIR }}
+
+      - name: Test formulae
+        run: brew test-bot --only-formulae
+        working-directory: ${{ env.BOTTLES_DIR }}
+        env:
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Post-build steps
+        if: always()
+        uses: Homebrew/actions/post-build@main
+        with:
+          runner: ${{ matrix.runner }}
+          bottles-directory: ${{ env.BOTTLES_DIR }}
+          logs-directory: ${{ env.BOTTLES_DIR }}/logs

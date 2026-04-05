@@ -5,16 +5,24 @@ on:
     types:
       - labeled
 
+permissions:
+  actions: read
+  checks: read
+  contents: write
+  issues: read
+  packages: write
+  pull-requests: write
+
+defaults:
+  run:
+    shell: bash -xeuo pipefail {0}
+
 jobs:
   pr-pull:
     if: contains(github.event.pull_request.labels.*.name, 'pr-pull')
     runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      checks: read
-      contents: write
-      issues: read
-      pull-requests: write
+    container:
+      image: ghcr.io/homebrew/brew:main
     steps:
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@main
@@ -28,7 +36,20 @@ jobs:
         env:
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUEST: ${{ github.event.pull_request.number }}
-        run: brew pr-pull --debug --tap="$GITHUB_REPOSITORY" "$PULL_REQUEST"
+        run: |
+          brew pr-pull \
+            --debug \
+            --no-upload \
+            --workflows=tests.yml \
+            --root-url="https://ghcr.io/v2/huadeity/homebrew-tap" \
+            --tap="$GITHUB_REPOSITORY" \
+            "$PULL_REQUEST"
+
+      - name: Upload bottles to GHCR
+        env:
+          HOMEBREW_GITHUB_PACKAGES_USER: huadeity
+          HOMEBREW_GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: brew pr-upload --debug --root-url="https://ghcr.io/v2/huadeity/homebrew-tap"
 
       - name: Push commits
         uses: Homebrew/actions/git-try-push@main
