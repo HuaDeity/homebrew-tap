@@ -7,9 +7,9 @@ class VscodeHtmlLanguageservice < Formula
 
   bottle do
     root_url "https://github.com/HuaDeity/homebrew-tap/releases/download/vscode-html-languageservice-4.10.7"
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "a83867dac100395e0f6c4891108f10e5c4760bcb3c28bb1d48d1fb7bd673c197"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "d25afb88891ac8c560e58cb369f8bd0150de3bc28d4faa841e191727f6aac786"
+    rebuild 2
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "98d681e82bab27fa142ad9c909f438b7de5eeee684dce30e4609fe3fc7d2a7c9"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "32c05879659299b704fda9672a16801163325f0fd9851f42a2324e9832432c3b"
   end
 
   depends_on "node"
