@@ -5,6 +5,12 @@ class VscodeHtmlLanguageservice < Formula
   sha256 "93e4e3b97c0af720ff5068187b7058ed9843c155cd47859db05ba53c12b38d78"
   license "MIT"
 
+  bottle do
+    root_url "https://ghcr.io/v2/huadeity/tap"
+    rebuild 5
+    sha256 cellar: :any_skip_relocation, all: "99c52e3b988220c61358ac05685cea3e1a9a38262ca5e0d2ba2f7fab651f1ced"
+  end
+
   depends_on "node"
   conflicts_with "vscode-langservers-extracted", because: "both provide vscode-html-language-server"
 
