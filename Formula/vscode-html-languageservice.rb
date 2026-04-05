@@ -17,7 +17,7 @@ class VscodeHtmlLanguageservice < Formula
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink libexec/"bin/vscode-html-language-server"
+    bin.install_symlink libexec.glob("bin/vscode-html-language-server")
   end
 
   test do

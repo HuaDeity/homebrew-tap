@@ -22,10 +22,7 @@ class VscodeLangserversExtracted < Formula
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink libexec/"bin/vscode-css-language-server"
-    bin.install_symlink libexec/"bin/vscode-json-language-server"
-    bin.install_symlink libexec/"bin/vscode-eslint-language-server"
-    bin.install_symlink libexec/"bin/vscode-markdown-language-server"
+    bin.install_symlink libexec.glob("bin/vscode-{css,json,eslint,markdown}-language-server")
   end
 
   test do
