@@ -1,5 +1,18 @@
 name: brew pr-pull
 
+# Reference for future maintenance:
+# - Homebrew/homebrew-core/.github/workflows/publish-commit-bottles.yml — official publish workflow
+# - Homebrew/brew Library/Homebrew/dev-cmd/pr-pull.rb — brew pr-pull internals
+# - Homebrew/brew Library/Homebrew/dev-cmd/pr-upload.rb — bottle upload and GHCR logic
+#
+# Key notes:
+# - Uses pull_request_target so this workflow always runs from main (not the PR branch),
+#   giving it write permissions regardless of fork. Never run untrusted code here.
+# - --root-url is passed to brew pr-upload, which uses it to determine the upload service
+#   (GHCR vs GitHub Releases). The formula's root_url comes from the bottle JSON generated
+#   by brew test-bot (see tests.yml --root-url), NOT from this flag.
+# - HOMEBREW_GITHUB_PACKAGES_USER/TOKEN are required for skopeo to push OCI images to GHCR.
+
 on:
   pull_request_target:
     types:

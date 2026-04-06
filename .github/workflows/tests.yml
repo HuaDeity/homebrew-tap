@@ -1,10 +1,35 @@
 name: brew test-bot
 
+# Reference for future maintenance:
+# - Homebrew/homebrew-core/.github/workflows/tests.yml — official workflow structure
+# - Homebrew/homebrew-core/.github/workflows/scripts/check-labels.js — default test-bot
+#   args and label-driven overrides (e.g. CI-skip-livecheck, CI-skip-online-checks)
+# - Homebrew/brew Library/Homebrew/test_bot/formulae.rb — brew test-bot internals
+# - Homebrew/brew Library/Homebrew/dev-cmd/bottle.rb — brew bottle / --merge internals
+# - Homebrew/brew Library/Homebrew/dev-cmd/pr-upload.rb — pr-upload / GHCR upload logic
+#
+# Key differences from homebrew-core intentionally kept:
+# - Hardcoded matrix (macos-latest + ubuntu-latest) instead of brew determine-test-runners,
+#   which requires homebrew-core's private macOS fleet.
+# - --root-url passed explicitly: non-core taps default to GitHub Releases in
+#   test_bot/formulae.rb:bottle_reinstall_formula. homebrew-core omits it because its default
+#   bottle domain is already ghcr.io/v2/homebrew/core. Note: Homebrew normalizes
+#   "huadeity/homebrew-tap" → "huadeity/tap" (strips "homebrew-" prefix) via GitHubPackages.
+# - No dependent testing (test_deps job) — not needed for this tap.
+# - No label-driven flag overrides (CI-skip-livecheck etc.) — add check-labels.js style
+#   logic if this tap grows and those escape hatches become useful.
+
 on:
   push:
     branches:
       - main
   pull_request:
+
+# Cancel in-progress runs for the same ref when a new push arrives.
+# Avoids wasting CI minutes on outdated commits.
+concurrency:
+  group: "tests-${{ github.ref }}"
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
@@ -27,12 +52,47 @@ jobs:
 
       - run: brew test-bot --only-tap-syntax
 
+  formulae_detect:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/homebrew/brew:main
+    outputs:
+      added_formulae: ${{ steps.formulae-detect.outputs.added_formulae }}
+      deleted_formulae: ${{ steps.formulae-detect.outputs.deleted_formulae }}
+    steps:
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          core: true
+
+      - name: Detect formulae
+        # Detects which formulae were added/deleted in this PR.
+        # --added-formulae: brew test-bot sets new_formula=true for these, which triggers
+        #   brew audit --new (stricter) and sets rebuild=0 via FormulaVersions returning nil
+        #   for formulas not yet in origin/HEAD.
+        # --deleted-formulae: allows brew test-bot to handle formula removal correctly.
+        id: formulae-detect
+        run: brew test-bot --only-formulae-detect
+
   test-bot:
     if: github.event_name == 'pull_request'
-    needs: tap_syntax
+    needs: [tap_syntax, formulae_detect]
     strategy:
       matrix:
         include:
+          # Hardcoded matrix instead of brew determine-test-runners:
+          # - determine-test-runners always generates a sonoma-x86_64-{run_id} Intel runner
+          #   (NEWEST_HOMEBREW_CORE_INTEL_MACOS_RUNNER = :sonoma in github_runner_matrix.rb)
+          #   which is a private self-hosted runner we don't have access to. There is no
+          #   env var or flag to suppress it.
+          # - For native-code formulas needing platform-specific bottles, expand this matrix
+          #   manually. macos-13 is the only public Intel GitHub Actions runner available,
+          #   but Intel support will disappear from Homebrew CI once sonoma leaves the
+          #   3-version support window (OLDEST_HOMEBREW_CORE_MACOS_RUNNER bumps past sonoma).
+          # - Our current formulas produce `all:` bottles (pure JS/scripts), so macos-latest
+          #   (ARM) + ubuntu-latest (x86_64) is sufficient.
           - runner: macos-latest
           - runner: ubuntu-latest
             container: ghcr.io/homebrew/brew:main
@@ -54,13 +114,27 @@ jobs:
         # compiler, dependency versions), making each platform's bottle SHA unique and
         # preventing brew bottle --merge from consolidating them into a single `all:` bottle.
         # With it, all platforms produce identical tarballs → identical SHAs → `all:` bottle.
+        # homebrew-core uses this by default (hardcoded in check-labels.js).
         #
-        # --root-url: brew test-bot defaults to GitHub Releases URL for non-core taps
-        # (see test_bot/formulae.rb). This URL ends up in the bottle JSON, and brew bottle
-        # --merge reads root_url directly from the JSON (ignoring brew pr-pull's --root-url).
-        # Passing it here ensures the JSON — and therefore the formula — gets the correct
-        # GHCR root_url.
-        run: brew test-bot --only-formulae --only-json-tab --root-url="https://ghcr.io/v2/huadeity/homebrew-tap"
+        # --root-url: brew test-bot defaults to GitHub Releases URL for non-core taps. This URL
+        # ends up in the bottle JSON, and brew bottle --merge reads root_url directly from the
+        # JSON (ignoring brew pr-pull's --root-url). Passing it here ensures the JSON — and
+        # therefore the formula — gets the correct GHCR root_url.
+        #
+        # --skip-dependents: explicitly disables dependent formula testing (we have no test_deps
+        # job). homebrew-core includes this in its default args via check-labels.js.
+        #
+        # --junit: generates JUnit XML test reports uploaded as CI artifacts, viewable in the
+        # GitHub Actions summary. homebrew-core includes this in its default args.
+        run: |
+          brew test-bot \
+            --only-formulae \
+            --only-json-tab \
+            --skip-dependents \
+            --junit \
+            --root-url="https://ghcr.io/v2/huadeity/homebrew-tap" \
+            --added-formulae="${{ needs.formulae_detect.outputs.added_formulae }}" \
+            --deleted-formulae="${{ needs.formulae_detect.outputs.deleted_formulae }}"
         working-directory: ${{ env.BOTTLES_DIR }}
         env:
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
