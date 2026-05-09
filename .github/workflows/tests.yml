@@ -58,6 +58,7 @@ jobs:
     container:
       image: ghcr.io/homebrew/brew:main
     outputs:
+      testing_formulae: ${{ steps.formulae-detect.outputs.testing_formulae }}
       added_formulae: ${{ steps.formulae-detect.outputs.added_formulae }}
       deleted_formulae: ${{ steps.formulae-detect.outputs.deleted_formulae }}
     steps:
@@ -68,11 +69,13 @@ jobs:
           core: true
 
       - name: Detect formulae
-        # Detects which formulae were added/deleted in this PR.
-        # --added-formulae: brew test-bot sets new_formula=true for these, which triggers
-        #   brew audit --new (stricter) and sets rebuild=0 via FormulaVersions returning nil
-        #   for formulas not yet in origin/HEAD.
-        # --deleted-formulae: allows brew test-bot to handle formula removal correctly.
+        # Detects which formulae are added/deleted/modified in this PR. Outputs:
+        # - testing_formulae: full list (added + modified) — what brew test-bot actually
+        #   builds and tests via --testing-formulae. Without this, test-bot's
+        #   `Formulae#run!` loop is empty and the job exits in seconds with no bottles.
+        # - added_formulae: subset that's brand new — brew test-bot sets new_formula=true
+        #   for these, triggering `brew audit --new` (stricter) and rebuild=0.
+        # - deleted_formulae: subset removed in this PR.
         id: formulae-detect
         run: brew test-bot --only-formulae-detect
 
@@ -80,24 +83,40 @@ jobs:
     if: github.event_name == 'pull_request'
     needs: [tap_syntax, formulae_detect]
     strategy:
+      fail-fast: false
       matrix:
         include:
-          # Hardcoded matrix instead of brew determine-test-runners:
-          # - determine-test-runners always generates a sonoma-x86_64-{run_id} Intel runner
-          #   (NEWEST_HOMEBREW_CORE_INTEL_MACOS_RUNNER = :sonoma in github_runner_matrix.rb)
-          #   which is a private self-hosted runner we don't have access to. There is no
-          #   env var or flag to suppress it.
-          # - For native-code formulas needing platform-specific bottles, expand this matrix
-          #   manually. macos-13 is the only public Intel GitHub Actions runner available,
-          #   but Intel support will disappear from Homebrew CI once sonoma leaves the
-          #   3-version support window (OLDEST_HOMEBREW_CORE_MACOS_RUNNER bumps past sonoma).
-          # - Our current formulas produce `all:` bottles (pure JS/scripts), so macos-latest
-          #   (ARM) + ubuntu-latest (x86_64) is sufficient.
-          - runner: macos-latest
+          # Hardcoded matrix instead of brew determine-test-runners, which targets
+          # homebrew-core's private self-hosted fleet (custom labels like
+          # "{version}-{arch}-{run_id}", with no `macos-` prefix). We don't have access;
+          # there is no env var or flag to suppress it.
+          #
+          # Public-runner equivalents of homebrew-core's determine-test-runners output:
+          # - macos-{14,15,26}: per the runner-images README these bare labels are the
+          #   GitHub-hosted Apple Silicon runners (the Intel images live behind billable
+          #   `-large`/`-intel` larger runner labels — no free public Intel macOS exists,
+          #   so we can't substitute homebrew-core's private macOS 14-x86_64). Range
+          #   mirrors OLDEST..NEWEST_GITHUB_ACTIONS_ARM_MACOS_RUNNER (sonoma..tahoe).
+          # - Linux: container image, --user, and self-hosted env var copied verbatim
+          #   from homebrew-core's emitted runner spec. ubuntu-22.04-arm matches the brew
+          #   image's Ubuntu base.
+          #
+          # macOS 14 (Sonoma) is deprecating 2026-11-02 — drop that entry once it goes
+          # away. Native binaries naturally produce per-platform bottles; --only-json-tab
+          # still works for any future pure-script formula by consolidating into `all:`.
+          - runner: macos-26
+          - runner: macos-15
+          - runner: macos-14
           - runner: ubuntu-latest
-            container: ghcr.io/homebrew/brew:main
+            container:
+              image: ghcr.io/homebrew/brew:main
+              options: --user=linuxbrew -e GITHUB_ACTIONS_HOMEBREW_SELF_HOSTED
+          - runner: ubuntu-22.04-arm
+            container:
+              image: ghcr.io/homebrew/brew:main
+              options: --user=linuxbrew -e GITHUB_ACTIONS_HOMEBREW_SELF_HOSTED
     runs-on: ${{ matrix.runner }}
-    container: ${{ matrix.container || '' }}
+    container: ${{ matrix.container }}
     timeout-minutes: 60
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -133,6 +152,7 @@ jobs:
             --skip-dependents \
             --junit \
             --root-url="https://ghcr.io/v2/huadeity/homebrew-tap" \
+            --testing-formulae="${{ needs.formulae_detect.outputs.testing_formulae }}" \
             --added-formulae="${{ needs.formulae_detect.outputs.added_formulae }}" \
             --deleted-formulae="${{ needs.formulae_detect.outputs.deleted_formulae }}"
         working-directory: ${{ env.BOTTLES_DIR }}
