@@ -34,8 +34,6 @@ jobs:
 
       - name: Configure Git user
         uses: Homebrew/actions/git-user-config@main
-        with:
-          directory: ${{ steps.set-up-homebrew.outputs.repository-path }}
 
       - name: Fix tap style
         working-directory: ${{ steps.set-up-homebrew.outputs.repository-path }}

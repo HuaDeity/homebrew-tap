@@ -10,6 +10,8 @@ class VscodeLangserversExtracted < Formula
     formula "vscode-html-languageservice"
   end
 
+  no_autobump! because: :requires_manual_review
+
   bottle do
     root_url "https://ghcr.io/v2/huadeity/tap"
     sha256 cellar: :any_skip_relocation, all: "9e3a38394b76434f551d08f04bf1d4d92542ffbbe8ffea01c4cabca752e86e79"
