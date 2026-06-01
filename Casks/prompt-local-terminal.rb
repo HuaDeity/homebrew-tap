@@ -12,7 +12,7 @@ cask "prompt-local-terminal" do
     regex(/href=.*?Install%20Prompt%20Local%20Terminal%20v?(\d+(?:\.\d+)+)\.zip/i)
   end
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   pkg "Install Prompt Local Terminal.pkg"
 
