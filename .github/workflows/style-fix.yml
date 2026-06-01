@@ -1,0 +1,53 @@
+name: Fix tap style
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/style-fix.yml
+  workflow_dispatch:
+  schedule:
+    # Every Thursday 11 am — one hour before autobump
+    - cron: "0 11 * * 4"
+
+permissions:
+  contents: write
+
+defaults:
+  run:
+    shell: bash -xeuo pipefail {0}
+
+jobs:
+  style-fix:
+    if: github.repository == 'HuaDeity/homebrew-tap'
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/homebrew/brew:main
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@main
+        with:
+          core: true
+
+      - name: Configure Git user
+        uses: Homebrew/actions/git-user-config@main
+        with:
+          directory: ${{ steps.set-up-homebrew.outputs.repository-path }}
+
+      - name: Fix tap style
+        working-directory: ${{ steps.set-up-homebrew.outputs.repository-path }}
+        env:
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          brew style --fix huadeity/tap || true
+          git diff --quiet && exit 0
+          git add -A
+          git commit -m "style: auto-fix tap style violations"
+
+      - name: Push style fixes
+        uses: Homebrew/actions/git-try-push@main
+        with:
+          directory: ${{ steps.set-up-homebrew.outputs.repository-path }}
+          branch: main
