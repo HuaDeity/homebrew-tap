@@ -2,18 +2,13 @@ class VscodeLangserversExtracted < Formula
   desc "HTML/CSS/JSON/ESLint/Markdown language servers with Zed's patched HTML server"
   homepage "https://github.com/zed-industries/vscode-langservers-extracted"
   url "https://registry.npmjs.org/vscode-langservers-extracted/-/vscode-langservers-extracted-4.10.0.tgz"
-  version "4.10.7"
+  version "4.10.8"
   sha256 "d6e2d090d09c4b91daa74e9e7462a3d3f244efb96aa5111004cfffa49d6dc9ef"
   license "MIT"
 
   livecheck do
     formula "huadeity/tap/vscode-html-languageservice"
     skip "bumped automatically with vscode-html-languageservice via --bump-synced"
-  end
-
-  bottle do
-    root_url "https://ghcr.io/v2/huadeity/tap"
-    sha256 cellar: :any_skip_relocation, all: "9e3a38394b76434f551d08f04bf1d4d92542ffbbe8ffea01c4cabca752e86e79"
   end
 
   depends_on "huadeity/tap/vscode-html-languageservice"
