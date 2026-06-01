@@ -1,4 +1,4 @@
-class VscodeLangserversExtracted < Formula
+class VscodeLangserversExtractedZed < Formula
   desc "HTML/CSS/JSON/ESLint/Markdown language servers with Zed's patched HTML server"
   homepage "https://github.com/zed-industries/vscode-langservers-extracted"
   url "https://registry.npmjs.org/vscode-langservers-extracted/-/vscode-langservers-extracted-4.10.0.tgz"
@@ -9,6 +9,8 @@ class VscodeLangserversExtracted < Formula
   livecheck do
     formula "huadeity/tap/vscode-html-languageservice"
   end
+
+  conflicts_with "vscode-langservers-extracted", because: "both provide vscode-{css,json,eslint,markdown}-language-server"
 
   depends_on "huadeity/tap/vscode-html-languageservice"
   depends_on "node"
