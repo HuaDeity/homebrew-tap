@@ -8,6 +8,7 @@ class VscodeLangserversExtracted < Formula
 
   livecheck do
     formula "huadeity/tap/vscode-html-languageservice"
+    skip "bumped automatically with vscode-html-languageservice via --bump-synced"
   end
 
   bottle do
