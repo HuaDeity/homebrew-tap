@@ -121,6 +121,9 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       BOTTLES_DIR: ${{ github.workspace }}/bottles
+      # pre-build runs `brew doctor`, which fails if this tap is untrusted.
+      # The tap being tested is always this tap itself, so trust is implicit.
+      HOMEBREW_NO_REQUIRE_TAP_TRUST: 1
     steps:
       - name: Pre-test steps
         uses: Homebrew/actions/pre-build@main
