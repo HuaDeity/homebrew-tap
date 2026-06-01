@@ -1,8 +1,8 @@
 class VscodeHtmlLanguageservice < Formula
   desc "HTML language server with Zed's workspace-edit tag rename patch"
   homepage "https://github.com/zed-industries/vscode-langservers-extracted"
-  url "https://registry.npmjs.org/@zed-industries/vscode-langservers-extracted/-/vscode-langservers-extracted-4.10.7.tgz"
-  sha256 "93e4e3b97c0af720ff5068187b7058ed9843c155cd47859db05ba53c12b38d78"
+  url "https://registry.npmjs.org/@zed-industries/vscode-langservers-extracted/-/vscode-langservers-extracted-4.10.8.tgz"
+  sha256 "0e32951a7cb7782fd360a10a9296323b288e31a19552811757d4da29027546cc"
   license "MIT"
 
   bottle do
