@@ -10,10 +10,11 @@ class VscodeLangserversExtractedZed < Formula
     formula "huadeity/tap/vscode-html-languageservice"
   end
 
-  conflicts_with "vscode-langservers-extracted", because: "both provide vscode-{css,json,eslint,markdown}-language-server"
-
   depends_on "huadeity/tap/vscode-html-languageservice"
   depends_on "node"
+
+  conflicts_with "vscode-langservers-extracted",
+                 because: "both provide vscode-{css,json,eslint,markdown}-language-server"
 
   def install
     system "npm", "install", *std_npm_args
