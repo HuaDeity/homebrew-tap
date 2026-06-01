@@ -7,10 +7,8 @@ class VscodeLangserversExtracted < Formula
   license "MIT"
 
   livecheck do
-    formula "vscode-html-languageservice"
+    formula "huadeity/tap/vscode-html-languageservice"
   end
-
-  no_autobump! because: :requires_manual_review
 
   bottle do
     root_url "https://ghcr.io/v2/huadeity/tap"
