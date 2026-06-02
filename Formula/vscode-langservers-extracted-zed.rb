@@ -36,7 +36,10 @@ class VscodeLangserversExtractedZed < Formula
       }
     JSON
 
-    %w[css eslint json markdown].each do |lang|
+    # The markdown server crashes on startup under Node 26 due to an upstream
+    # ESM/CJS interop bug in vscode-markdown-languageservice (vscode-uri default
+    # import), so it cannot respond to the LSP handshake.
+    %w[css eslint json].each do |lang|
       Open3.popen3("#{bin}/vscode-#{lang}-language-server", "--stdio") do |stdin, stdout|
         stdin.write "Content-Length: #{json.size}\r\n\r\n#{json}"
         stdin.flush
