@@ -10,6 +10,11 @@ class VscodeLangserversExtractedZed < Formula
     formula "huadeity/tap/vscode-html-languageservice"
   end
 
+  bottle do
+    root_url "https://ghcr.io/v2/huadeity/tap"
+    sha256 cellar: :any_skip_relocation, all: "b6064f409389587be4b9d94356942db415a927b66e20add74f58fbb96d528ebc"
+  end
+
   depends_on "huadeity/tap/vscode-html-languageservice"
   depends_on "node"
 
