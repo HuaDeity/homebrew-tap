@@ -45,7 +45,7 @@ jobs:
       image: ghcr.io/homebrew/brew:main
     steps:
       - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@e99025eb970cfa124b8284a35463d87426917478 # 2026.09.28.1
+        uses: Homebrew/actions/setup-homebrew@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           core: true
@@ -63,7 +63,7 @@ jobs:
       deleted_formulae: ${{ steps.formulae-detect.outputs.deleted_formulae }}
     steps:
       - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@e99025eb970cfa124b8284a35463d87426917478 # 2026.09.28.1
+        uses: Homebrew/actions/setup-homebrew@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           core: true
@@ -123,7 +123,7 @@ jobs:
       BOTTLES_DIR: ${{ github.workspace }}/bottles
     steps:
       - name: Pre-test steps
-        uses: Homebrew/actions/pre-build@e99025eb970cfa124b8284a35463d87426917478 # 2026.09.28.1
+        uses: Homebrew/actions/pre-build@main
         with:
           bottles-directory: ${{ env.BOTTLES_DIR }}
 
@@ -161,7 +161,7 @@ jobs:
 
       - name: Post-build steps
         if: always()
-        uses: Homebrew/actions/post-build@e99025eb970cfa124b8284a35463d87426917478 # 2026.09.28.1
+        uses: Homebrew/actions/post-build@main
         with:
           runner: ${{ matrix.runner }}
           bottles-directory: ${{ env.BOTTLES_DIR }}
