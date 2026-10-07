@@ -27,13 +27,13 @@ jobs:
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@e99025eb970cfa124b8284a35463d87426917478 # 2026.09.28.1
+        uses: Homebrew/actions/setup-homebrew@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           core: true
 
       - name: Configure Git user
-        uses: Homebrew/actions/git-user-config@e99025eb970cfa124b8284a35463d87426917478 # 2026.09.28.1
+        uses: Homebrew/actions/git-user-config@main
 
       - name: Fix tap style
         working-directory: ${{ steps.set-up-homebrew.outputs.repository-path }}
@@ -46,7 +46,7 @@ jobs:
           git commit -m "style: auto-fix tap style violations"
 
       - name: Push style fixes
-        uses: Homebrew/actions/git-try-push@e99025eb970cfa124b8284a35463d87426917478 # 2026.09.28.1
+        uses: Homebrew/actions/git-try-push@main
         with:
           directory: ${{ steps.set-up-homebrew.outputs.repository-path }}
           branch: main
