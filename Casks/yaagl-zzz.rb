@@ -1,6 +1,6 @@
 cask "yaagl-zzz" do
-  version "0.3.20"
-  sha256 "489319cf7280188b251f112dd6660600246d734be0962edb95854c9fbfaeaf2a"
+  version "0.4.0"
+  sha256 "a147bd9b94be5a82dbd23e810d9a4d5a9cbfbbe80da40f66626bf0e2c3556765"
 
   url "https://github.com/yaagl/yet-another-anime-game-launcher/releases/download/#{version}/Yaagl.ZZZ.app.tar.gz"
   name "Yaagl ZZZ"
@@ -12,7 +12,7 @@ cask "yaagl-zzz" do
   end
 
   auto_updates true
-  depends_on :macos
+  depends_on macos: :ventura
 
   app "Yaagl ZZZ.app"
 
