@@ -1,6 +1,6 @@
 cask "yaagl-hsr" do
-  version "0.3.20"
-  sha256 "98868417e895aa26cfa46a84648c1ddcaddd0f9652c73d4aefae175ce29df8ba"
+  version "0.4.0"
+  sha256 "1f3d3ca8d7b0d7d340d9dd79e0d3a33e0386f022fecaa75dfe1b9d2becbfac6e"
 
   url "https://github.com/yaagl/yet-another-anime-game-launcher/releases/download/#{version}/Yaagl.HSR.app.tar.gz"
   name "Yaagl HSR"
@@ -12,7 +12,7 @@ cask "yaagl-hsr" do
   end
 
   auto_updates true
-  depends_on :macos
+  depends_on macos: :ventura
 
   app "Yaagl HSR.app"
 
